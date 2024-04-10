@@ -1,6 +1,6 @@
 //create a border
 var border = document.querySelector('#border');
-border.style.border = '1px solid black';
+border.style.border = '5px solid black';
 border.style.display = 'flex';
 border.style.flexDirection = 'column';
 border.style.width = "600px";
@@ -8,63 +8,65 @@ border.style.height = "500px";
 
 
 var n = 16;
-for(var i = 0; i < n; i++){
-    var row = document.createElement('div');
-    row.style.display = 'flex';
-    row.style.flexGrow = '1';
-    for(var j = 0; j < n; j++){
-        var newElement = document.createElement('div');
-        newElement.className = 'childDiv';
-        newElement.style.flex = '1';
-        newElement.style.border = '1px solid black';
-        newElement.style.padding = '10px';
-        row.appendChild(newElement);
-    }
-    border.appendChild(row);
-}
-var divs = document.querySelectorAll('.childDiv');
-    divs.forEach(function(child){
-        child.addEventListener('mouseenter', function(){
-            child.style.background = 'black';
-        });
-    });
+// for(var i = 0; i < n; i++){
+//     var row = document.createElement('div');
+//     row.style.display = 'flex';
+//     row.style.flexGrow = '1';
+//     for(var j = 0; j < n; j++){
+//         var newElement = document.createElement('div');
+//         newElement.className = 'childDiv';
+//         newElement.style.flex = '1';
+//         newElement.style.border = '1px solid black';
+//         newElement.style.padding = '10px';
+//         row.appendChild(newElement);
+//     }
+//     border.appendChild(row);
+// }
+// var divs = document.querySelectorAll('.childDiv');
+//     divs.forEach(function(child){
+//         child.addEventListener('mouseenter', function(){
+//             child.style.background = 'black';
+//         });
+//     });
 
-function change(number){
-    let child = document.querySelectorAll('.childDiv');
-    child.forEach(function(childDiv){
-        childDiv.remove();
-    })
-    
+    function change(number) {
+        // Clear existing grid
+        border.innerHTML = '';
 
-    for(var i = 0; i < number; i++){
-        var row = document.createElement('div');
-        row.style.display = 'flex';
+        // Calculate width and height of child divs
+        var borderWidth = border.offsetWidth;
+        var borderHeight = border.offsetHeight;
+        var cellWidth = borderWidth / number;
+        var cellHeight = borderHeight / number;
 
-        let w = 600/number;
-        let h = 500/number;
-        for(var j = 0; j < number; j++){
-            var newElement = document.createElement('div');
-            newElement.className = 'childDiv';
-            newElement.style.flex = '1';
-            newElement.style.width = w;
-            newElement.style.height = h;
-            newElement.style.border = '1px solid black';
-            newElement.style.padding = '10px';
-            row.appendChild(newElement);
+        // Create new grid
+        for (var i = 0; i < number; i++) {
+            var row = document.createElement('div');
+            row.style.display = 'flex';
+            row.style.flexGrow = '1';
+            for (var j = 0; j < number; j++) {
+                var newElement = document.createElement('div');
+                newElement.className = 'childDiv';
+                newElement.style.width = cellWidth + 'px';
+                newElement.style.height = cellHeight + 'px';
+                // newElement.style.border = '1px solid black';
+                // newElement.style.padding = '10px';
+                row.appendChild(newElement);
+            }
+
+            border.appendChild(row);
         }
-
-        border.appendChild(row);
-    }
-    var divs = document.querySelectorAll('.childDiv');
-    divs.forEach(function(child){
-        child.addEventListener('mouseenter', function(){
-            child.style.color = 'black';
+        
+        // Attach mouse enter event listener
+        var divs = document.querySelectorAll('.childDiv');
+        divs.forEach(function(child) {
+            child.addEventListener('mouseenter', function() {
+                child.style.background = 'black';
+            });
         });
-    });
-
-}
-
-document.addEventListener('DOMContentLoaded', function() {
+    }
+    change(n);
+    
     var sixtyFour = document.getElementById('sixtyFour');
     sixtyFour.addEventListener('click', function() {
         change(64);
@@ -74,5 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
     oneTwentyEightButton.addEventListener('click', function() {
         change(128);
     });
-});
 
+    var custom = document.querySelector("#custom")
+    custom.addEventListener('click', function(){
+        let userVal = prompt("please enter a size");
+        change(userVal);
+    })
