@@ -8,32 +8,10 @@ border.style.height = "500px";
 
 
 var n = 16;
-// for(var i = 0; i < n; i++){
-//     var row = document.createElement('div');
-//     row.style.display = 'flex';
-//     row.style.flexGrow = '1';
-//     for(var j = 0; j < n; j++){
-//         var newElement = document.createElement('div');
-//         newElement.className = 'childDiv';
-//         newElement.style.flex = '1';
-//         newElement.style.border = '1px solid black';
-//         newElement.style.padding = '10px';
-//         row.appendChild(newElement);
-//     }
-//     border.appendChild(row);
-// }
-// var divs = document.querySelectorAll('.childDiv');
-//     divs.forEach(function(child){
-//         child.addEventListener('mouseenter', function(){
-//             child.style.background = 'black';
-//         });
-//     });
 
     function change(number) {
-        // Clear existing grid
         border.innerHTML = '';
 
-        // Calculate width and height of child divs
         var borderWidth = border.offsetWidth;
         var borderHeight = border.offsetHeight;
         var cellWidth = borderWidth / number;
@@ -58,7 +36,7 @@ var n = 16;
         }
         
         // Attach mouse enter event listener
-        var divs = document.querySelectorAll('.childDiv');
+        let divs = document.querySelectorAll('.childDiv');
         divs.forEach(function(child) {
             child.addEventListener('mouseenter', function() {
                 child.style.background = 'black';
@@ -66,7 +44,7 @@ var n = 16;
         });
     }
     change(n);
-    
+
     var sixtyFour = document.getElementById('sixtyFour');
     sixtyFour.addEventListener('click', function() {
         change(64);
@@ -77,8 +55,15 @@ var n = 16;
         change(128);
     });
 
-    var custom = document.querySelector("#custom")
+    var custom = document.querySelector("#custom");
     custom.addEventListener('click', function(){
         let userVal = prompt("please enter a size");
         change(userVal);
-    })
+    });
+    var clear = document.querySelector('#clear');
+    clear.addEventListener('click', function(){
+        let divs = document.querySelectorAll('.childDiv');
+        divs.forEach(function(div){
+            div.style.background = 'white';
+        })
+    });
