@@ -1,6 +1,23 @@
 /* button{
     margin-top: 20px;
 } */
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+}
 #id{
     padding: 5px;
+}
+
+#buttons{
+    margin-top: 10px;
+}
+#border{
+    background-color: white;
+}
+#title{
+    color: white;
 }
